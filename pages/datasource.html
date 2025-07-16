@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Datasource</title>
+    <link rel="stylesheet" href="../css/style_global.css" />
+    <link rel="stylesheet" href="../css/style_datasource.css" />
+    <script src="../js/script.js"></script>
+  </head>
+  <body>
+    <div class="backButtonContainer">
+      <a href="../index.html" class="backButton">Back</a>
+    </div>
+    <div class="datasourceParagraph" id="datasource">
+      <p>
+        The data used in this project was uploaded to kaggle.com by user David Cariboo. Their dataset scrapes popular
+        football data from the site "Transfermarkt" and adds it to multiple tables under a CC0: Public Domain license.
+        Relevant to our project is specifically the table "appearances," which can be exported as a CSV file. The
+        dataset is continuously updating; therefore, we decided to work with the contents as of November 8th, 2024.
+      </p>
+      <br />
+      <a href="https://www.kaggle.com/datasets/davidcariboo/player-scores?resource=download&select=appearances.csv"
+        >See source</a
+      >
+    </div>
+
+    <div class="datasourceParagraph" id="competitionsVisible" onClick="toggleCompetitions()">
+      <a>Which competitions are tracked?</a>
+      <a id="toggleArrow">&#x25BC;</a>
+    </div>
+
+    <div class="datasourceParagraph" id="competitionsList" style="display: none">
+      <h3>International Tournaments:</h3>
+      <ul>
+        <li>UEFA Champions League</li>
+        <li>UEFA Europa League</li>
+        <li>UEFA Europa Conference League</li>
+        <li>UEFA Champions League Qualification</li>
+        <li>UEFA Europa League Qualification</li>
+        <li>UEFA Europa Conference League Qualification</li>
+        <li>UEFA Super Cup</li>
+        <li>FIFA Club World Cup</li>
+      </ul>
+
+      <h3>England:</h3>
+      <ul>
+        <li>Premier League</li>
+        <li>FA Cup</li>
+        <li>EFL Cup</li>
+        <li>Community Shield</li>
+      </ul>
+
+      <h3>Spain:</h3>
+      <ul>
+        <li>La Liga</li>
+        <li>Copa del Rey</li>
+        <li>Supercopa</li>
+      </ul>
+
+      <h3>Italy:</h3>
+      <ul>
+        <li>Serie A</li>
+        <li>Supercoppa Italiana</li>
+        <li>Coppa Italia</li>
+      </ul>
+
+      <h3>Germany:</h3>
+      <ul>
+        <li>Bundesliga</li>
+        <li>DFB-Pokal</li>
+        <li>DFL-Supercup</li>
+      </ul>
+
+      <h3>France:</h3>
+      <ul>
+        <li>Ligue 1</li>
+        <li>Trophee des Champions</li>
+      </ul>
+
+      <h3>Netherlands:</h3>
+      <ul>
+        <li>Eredivisie</li>
+        <li>Toto KNVB Beker</li>
+        <li>Johan Cruijff Schaal</li>
+      </ul>
+
+      <h3>Portugal:</h3>
+      <ul>
+        <li>Liga Portugal</li>
+        <li>Supertaca Candido de Oliveira</li>
+      </ul>
+
+      <h3>Belgium:</h3>
+      <ul>
+        <li>Jupiler Pro League</li>
+        <li>Belgian Supercup</li>
+      </ul>
+
+      <h3>Scotland:</h3>
+      <ul>
+        <li>Scottish Premiership</li>
+        <li>SFA Cup</li>
+      </ul>
+
+      <h3>Ukraine:</h3>
+      <ul>
+        <li>Premier Liga</li>
+        <li>Ukrainian Cup</li>
+        <li>Ukrainian Super Cup</li>
+      </ul>
+
+      <h3>Russia:</h3>
+      <ul>
+        <li>Premier Liga</li>
+        <li>Russian Cup</li>
+        <li>Russian Super Cup</li>
+      </ul>
+
+      <h3>Turkey:</h3>
+      <ul>
+        <li>Süper Lig</li>
+        <li>Allianz Cup</li>
+      </ul>
+
+      <h3>Greece:</h3>
+      <ul>
+        <li>Super League 1</li>
+        <li>Kypello Elladas</li>
+      </ul>
+
+      <h3>Denmark:</h3>
+      <ul>
+        <li>Superligaen</li>
+        <li>Sydbank Pokalen</li>
+      </ul>
+    </div>
+
+    <div class="datasourceParagraph" id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>
+        This dataset includes data from 14 European countries major national competitions, 4 European international
+        tournaments and 1 intercontinental club competition. It is not intended to cover every football competition
+        globally, nor does it include amateur-level events. Rather, it focuses on the performance of male football
+        players in a selection of top-tier European competitions, along with one intercontinental club competition.
+      </p>
+    </div>
+  </body>
+</html>

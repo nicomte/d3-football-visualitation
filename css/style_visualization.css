@@ -1,0 +1,48 @@
+#visualisierungContent{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#dropdownContainer{
+  padding-right: 5px
+}
+#checkboxContainer {
+  padding: 10px;
+  background-color: #f9f9f9;
+  width: 90%;
+  max-height: 30vh; /* Limit the height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.checkboxelement {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.checkboxes{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-height: 80vh;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; /* Prevent width issues with padding */
+    min-width: 550px;
+}
+#optionalCheckboxes{
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-height: 80vh;
+    width: 90%;
+    padding: 10px;
+}
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #45a049;
+}

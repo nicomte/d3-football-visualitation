@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Concept Visualization</title>
+    <link rel="stylesheet" href="../css/style_global.css" />
+    <link rel="stylesheet" href="../css/style_visualizationConcept.css" />
+  </head>
+  <body>
+    <div class="backButtonContainer">
+      <a href="../index.html" class="backButton">Back</a>
+    </div>
+    <div class="content">
+      <div class="datasourceParagraph">
+        <h3>1. Fundamentals of Visual Design</h3>
+        <p>
+          Our introduction to visual design concepts came through Andy Kirk’s webinar, where he highlighted common data visualization challenges—many of which we encountered in our project. Specifically, we lacked technical expertise in D3 and familiarity with visualizing data beyond basic Excel graphs.
+        </p>
+        <p>
+          We applied the Schneiderman Mantra to structure our visualization. It begins with a simple bar chart showing aggregated metrics per country and year, which can be filtered. Clicking reveals a detailed comparison of the Top 10 contributors to a metric within a specific year and country.
+        </p>
+        <p>
+          Using data from Transfermarkt, a trusted football database, we aimed to present millions of records in a way that is both intuitive for newcomers and visually appealing. This approach ensures clear interpretation of a football nation’s aggregated strength and contributor structure.
+        </p>
+
+        <h3>2. Tuft's Principles of Visual Design</h3>
+        <ol>
+          <li><strong>Comparison:</strong> Our visualization enables three levels of comparison:
+            <ul>
+              <li>Aggregated metrics by nation</li>
+              <li>Detailed comparisons of nations' top contributors</li>
+              <li>Within-country metrics, identifying top players in specific categories</li>
+            </ul>
+          </li>
+          <li><strong>Causality:</strong> Causality is a secondary focus in our visualization, but users can infer trends by viewing metrics side by side.</li>
+          <li><strong>Multivariate Analysis:</strong> Our visualization enables the comparisons of goals, assists, cards, and minutes played across countries, years, and individual players.</li>
+          <li><strong>Integration of Evidence:</strong> We centralized all variables within a visually intuitive area, with the filters placed to the side.</li>
+          <li><strong>Documentation:</strong> Our visualization clearly explains its data sources, namely Transfermarkt, and offers a profile of its authors and project motivation.</li>
+          <li><strong>Content Counts Above All:</strong> Football fans have an innate desire for statistics and comparisons, an itch we are confident our visualization scratches.</li>
+        </ol>
+
+        <h3>3. Data Ink Ratio</h3>
+        <p>
+          The bar chart is efficient in terms of Data Ink Ratio, it could only be improved by removing filling from the bars. More debatable is the use of the mosaic chat, which use a lot of ink to show what a line chart can also achieve. We still decided to keep them, since it provides more information on a quick overview then other charts.
+        </p>
+
+        <h3>4. Human Perception</h3>
+        <p>
+          We prioritized a simple, clean unicolor design for the bar chart, so that the perception process is as intuitive as possible. The bar chart in our overview section is clearly labelled and dynamically updated and fits neatly into the screen next to the filters. The top 10 contributors view allows the user to compare the development of these players over different years in comparison to the other players from the year chosen. The mosaic chart shows each Player in a different color to distinguish between the players and the density of the color shows the distribution of the contribution.
+        </p>
+
+        <h3>5. Tasks in Data Visualization</h3>
+        <p>
+          Our data was informative enough without normalization, however, we did merge two tables—appearances and players— into a single CSV file. To ensure smooth filtering, we removed any whitespace from the country names in the data, allowing them to function properly as unique identifiers.
+        </p>
+
+        <h3>6. Interaction Concept</h3>
+        <p>
+          The visualization starts on a simple bar chart, displaying aggregated values, allowing users to filter by metric, year, and country. This caters to the inherent desire of football fans for simple comparisons, sparking curiosity and encouraging deeper exploration. By clicking on a bar, users are shown a detailed distribution of the top 10 contributors for the respective metric. The breakdown also shows the development of These 10 players in the last years.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

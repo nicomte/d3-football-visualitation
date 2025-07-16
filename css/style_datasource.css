@@ -1,0 +1,52 @@
+.datasourceParagraph {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Styling for competitionsVisible */
+#competitionsVisible {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px 10px 0 0; /* Keep rounded edges only at the top */
+  margin-bottom: 0; /* Remove margin at the bottom to connect with competitionsList */
+}
+
+/* Add hover effect for competitionsVisible */
+#competitionsVisible:hover {
+  cursor: pointer;
+}
+
+/* Styling for competitionsList */
+#competitionsList {
+  background-color: #f4f4f4; /* Same background as competitionsVisible */
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Keep shadow for visual connection */
+  border-radius: 0 0 10px 10px; /* Rounded edges only at the bottom */
+  margin-bottom: 0; /* No space below competitionsList */
+  border-top: none; /* Remove border/edge on top to connect visually */
+}
+
+/* Links styling inside datasource */
+#datasource a {
+  text-decoration: none;
+  color: #0056b3;
+  font-weight: bold;
+}
+
+#datasource a:hover {
+  text-decoration: underline;
+}
+
+h2 {
+  margin-top: 0;
+}
+#disclaimer{
+    margin-top: 20px;
+}

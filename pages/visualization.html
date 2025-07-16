@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Country Visualization</title>
+    <link rel="stylesheet" href="../css/style_visualization.css" />
+    <link rel="stylesheet" href="../css/style_global.css" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="../js/visualization.js" defer></script>
+    <script src="../js/topPlayers.js"></script>
+  </head>
+  <body>
+    <div class="backButtonContainer">
+      <a href="../index.html" class="backButton">Back</a>
+    </div>
+
+    <div id="dropdownContainer">
+      <label for="metric">Choose a metric:</label>
+      <select id="metric" name="metric" onchange="clearMosaic()">
+        <option value="goals">Goals</option>
+        <option value="assists">Assists</option>
+        <option value="yellow_cards">Yellow Cards</option>
+        <option value="red_cards">Red Cards</option>
+        <option value="minutes_played">Minutes played</option>
+      </select>
+      <label for="year">Choose a year:</label>
+      <select id="year" name="year" onchange="clearMosaic()">
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024" selected>2024</option>
+      </select>
+
+      <div id="chartInstructions" class="instructions">
+        <p>Click on any bar in the chart to see more details.</p>
+      </div>
+    </div>
+
+    <div id="visualisierungContent">
+      <div id="d3-object"></div>
+      <div id="comparisonContainer"></div>
+    </div>
+
+    <div id="checkboxContainer">
+      <div id="permanentCheckboxes" class="checkboxes">
+        <div class="checkboxelement">
+          <input type="checkbox" id="Argentina" name="Argentina" checked />
+          <label for="Argentina">Argentina</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Brazil" name="Brazil" checked />
+          <label for="Brazil">Brazil</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="England" name="England" checked />
+          <label for="England">England</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="France" name="France" checked />
+          <label for="France">France</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Germany" name="Germany" checked />
+          <label for="Germany">Germany</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Italy" name="Italy" checked />
+          <label for="Italy">Italy</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Portugal" name="Portugal" checked />
+          <label for="Portugal">Portugal</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Spain" name="Spain" checked />
+          <label for="Spain">Spain</label>
+        </div>
+      </div>
+
+      <button id="toggleCheckboxesButton" onclick="toggleOptionalCountries()">Show More Countries</button>
+
+      <div id="optionalCheckboxes" class="checkboxes">
+        <div class="checkboxelement">
+          <input type="checkbox" id="Afghanistan" name="Afghanistan" />
+          <label for="Afghanistan">Afghanistan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Albania" name="Albania" />
+          <label for="Albania">Albania</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Algeria" name="Algeria" />
+          <label for="Algeria">Algeria</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Angola" name="Angola" />
+          <label for="Angola">Angola</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="AntiguaandBarbuda" name="AntiguaandBarbuda" />
+          <label for="AntiguaandBarbuda">Antigua and Barbuda</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Armenia" name="Armenia" />
+          <label for="Armenia">Armenia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Aruba" name="Aruba" />
+          <label for="Aruba">Aruba</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Australia" name="Australia" />
+          <label for="Australia">Australia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Austria" name="Austria" />
+          <label for="Austria">Austria</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Azerbaijan" name="Azerbaijan" />
+          <label for="Azerbaijan">Azerbaijan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Barbados" name="Barbados" />
+          <label for="Barbados">Barbados</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Belarus" name="Belarus" />
+          <label for="Belarus">Belarus</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Belgium" name="Belgium" />
+          <label for="Belgium">Belgium</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Benin" name="Benin" />
+          <label for="Benin">Benin</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Bermuda" name="Bermuda" />
+          <label for="Bermuda">Bermuda</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Bolivia" name="Bolivia" />
+          <label for="Bolivia">Bolivia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Bonaire" name="Bonaire" />
+          <label for="Bonaire">Bonaire</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Bosnia-Herzegovina" name="Bosnia-Herzegovina" />
+          <label for="Bosnia-Herzegovina">Bosnia-Herzegovina</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Bulgaria" name="Bulgaria" />
+          <label for="Bulgaria">Bulgaria</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="BurkinaFaso" name="BurkinaFaso" />
+          <label for="BurkinaFaso">Burkina Faso</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Burundi" name="Burundi" />
+          <label for="Burundi">Burundi</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Cameroon" name="Cameroon" />
+          <label for="Cameroon">Cameroon</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Canada" name="Canada" />
+          <label for="Canada">Canada</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="CapeVerde" name="CapeVerde" />
+          <label for="CapeVerde">Cape Verde</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="CentralAfricanRepublic" name="CentralAfricanRepublic" />
+          <label for="CentralAfricanRepublic">Central African Republic</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Chad" name="Chad" />
+          <label for="Chad">Chad</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Chile" name="Chile" />
+          <label for="Chile">Chile</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="China" name="China" />
+          <label for="China">China</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="ChineseTaipei" name="ChineseTaipei" />
+          <label for="ChineseTaipei">Chinese Taipei</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Colombia" name="Colombia" />
+          <label for="Colombia">Colombia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Comoros" name="Comoros" />
+          <label for="Comoros">Comoros</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Congo" name="Congo" />
+          <label for="Congo">Congo</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="CostaRica" name="CostaRica" />
+          <label for="CostaRica">Costa Rica</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Coted'Ivoire" name="Coted'Ivoire" />
+          <label for="Coted'Ivoire">Cote d'Ivoire</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Croatia" name="Croatia" />
+          <label for="Croatia">Croatia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Cuba" name="Cuba" />
+          <label for="Cuba">Cuba</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Curacao" name="Curacao" />
+          <label for="Curacao">Curacao</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Cyprus" name="Cyprus" />
+          <label for="Cyprus">Cyprus</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="CzechRepublic" name="CzechRepublic" />
+          <label for="CzechRepublic">Czech Republic</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="DRCongo" name="DRCongo" />
+          <label for="DRCongo">DR Congo</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Denmark" name="Denmark" />
+          <label for="Denmark">Denmark</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="DominicanRepublic" name="DominicanRepublic" />
+          <label for="DominicanRepublic">Dominican Republic</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Ecuador" name="Ecuador" />
+          <label for="Ecuador">Ecuador</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Egypt" name="Egypt" />
+          <label for="Egypt">Egypt</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="ElSalvador" name="ElSalvador" />
+          <label for="ElSalvador">El Salvador</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="EquatorialGuinea" name="EquatorialGuinea" />
+          <label for="EquatorialGuinea">Equatorial Guinea</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Eritrea" name="Eritrea" />
+          <label for="Eritrea">Eritrea</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Estonia" name="Estonia" />
+          <label for="Estonia">Estonia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Ethiopia" name="Ethiopia" />
+          <label for="Ethiopia">Ethiopia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="FaroeIslands" name="FaroeIslands" />
+          <label for="FaroeIslands">Faroe Islands</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Finland" name="Finland" />
+          <label for="Finland">Finland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="FrenchGuiana" name="FrenchGuiana" />
+          <label for="FrenchGuiana">French Guiana</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Gabon" name="Gabon" />
+          <label for="Gabon">Gabon</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Georgia" name="Georgia" />
+          <label for="Georgia">Georgia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Ghana" name="Ghana" />
+          <label for="Ghana">Ghana</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Greece" name="Greece" />
+          <label for="Greece">Greece</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Grenada" name="Grenada" />
+          <label for="Grenada">Grenada</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Guadeloupe" name="Guadeloupe" />
+          <label for="Guadeloupe">Guadeloupe</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Guatemala" name="Guatemala" />
+          <label for="Guatemala">Guatemala</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Guinea" name="Guinea" />
+          <label for="Guinea">Guinea</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Guinea-Bissau" name="Guinea-Bissau" />
+          <label for="Guinea-Bissau">Guinea-Bissau</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Guyana" name="Guyana" />
+          <label for="Guyana">Guyana</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Haiti" name="Haiti" />
+          <label for="Haiti">Haiti</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Honduras" name="Honduras" />
+          <label for="Honduras">Honduras</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Hungary" name="Hungary" />
+          <label for="Hungary">Hungary</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Iceland" name="Iceland" />
+          <label for="Iceland">Iceland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Indonesia" name="Indonesia" />
+          <label for="Indonesia">Indonesia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Iran" name="Iran" />
+          <label for="Iran">Iran</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Iraq" name="Iraq" />
+          <label for="Iraq">Iraq</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Ireland" name="Ireland" />
+          <label for="Ireland">Ireland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Israel" name="Israel" />
+          <label for="Israel">Israel</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Jamaica" name="Jamaica" />
+          <label for="Jamaica">Jamaica</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Japan" name="Japan" />
+          <label for="Japan">Japan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Jordan" name="Jordan" />
+          <label for="Jordan">Jordan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Kazakhstan" name="Kazakhstan" />
+          <label for="Kazakhstan">Kazakhstan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Kenya" name="Kenya" />
+          <label for="Kenya">Kenya</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Korea,North" name="Korea,North" />
+          <label for="Korea,North">Korea, North</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Korea,South" name="Korea,South" />
+          <label for="Korea,South">Korea, South</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Kosovo" name="Kosovo" />
+          <label for="Kosovo">Kosovo</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Kyrgyzstan" name="Kyrgyzstan" />
+          <label for="Kyrgyzstan">Kyrgyzstan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Laos" name="Laos" />
+          <label for="Laos">Laos</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Latvia" name="Latvia" />
+          <label for="Latvia">Latvia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Lebanon" name="Lebanon" />
+          <label for="Lebanon">Lebanon</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Liberia" name="Liberia" />
+          <label for="Liberia">Liberia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Libya" name="Libya" />
+          <label for="Libya">Libya</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Liechtenstein" name="Liechtenstein" />
+          <label for="Liechtenstein">Liechtenstein</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Lithuania" name="Lithuania" />
+          <label for="Lithuania">Lithuania</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Luxembourg" name="Luxembourg" />
+          <label for="Luxembourg">Luxembourg</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Madagascar" name="Madagascar" />
+          <label for="Madagascar">Madagascar</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Malawi" name="Malawi" />
+          <label for="Malawi">Malawi</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Malaysia" name="Malaysia" />
+          <label for="Malaysia">Malaysia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Mali" name="Mali" />
+          <label for="Mali">Mali</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Malta" name="Malta" />
+          <label for="Malta">Malta</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Martinique" name="Martinique" />
+          <label for="Martinique">Martinique</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Mauritania" name="Mauritania" />
+          <label for="Mauritania">Mauritania</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Mauritius" name="Mauritius" />
+          <label for="Mauritius">Mauritius</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Mexico" name="Mexico" />
+          <label for="Mexico">Mexico</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Moldova" name="Moldova" />
+          <label for="Moldova">Moldova</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Monaco" name="Monaco" />
+          <label for="Monaco">Monaco</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Montenegro" name="Montenegro" />
+          <label for="Montenegro">Montenegro</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Montserrat" name="Montserrat" />
+          <label for="Montserrat">Montserrat</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Morocco" name="Morocco" />
+          <label for="Morocco">Morocco</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Mozambique" name="Mozambique" />
+          <label for="Mozambique">Mozambique</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Netherlands" name="Netherlands" />
+          <label for="Netherlands">Netherlands</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Neukaledonien" name="Neukaledonien" />
+          <label for="Neukaledonien">Neukaledonien</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="NewZealand" name="NewZealand" />
+          <label for="NewZealand">New Zealand</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Nicaragua" name="Nicaragua" />
+          <label for="Nicaragua">Nicaragua</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Niger" name="Niger" />
+          <label for="Niger">Niger</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Nigeria" name="Nigeria" />
+          <label for="Nigeria">Nigeria</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="NorthMacedonia" name="NorthMacedonia" />
+          <label for="NorthMacedonia">North Macedonia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="NorthernIreland" name="NorthernIreland" />
+          <label for="NorthernIreland">Northern Ireland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Norway" name="Norway" />
+          <label for="Norway">Norway</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Oman" name="Oman" />
+          <label for="Oman">Oman</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Pakistan" name="Pakistan" />
+          <label for="Pakistan">Pakistan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Palestine" name="Palestine" />
+          <label for="Palestine">Palestine</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Panama" name="Panama" />
+          <label for="Panama">Panama</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Paraguay" name="Paraguay" />
+          <label for="Paraguay">Paraguay</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Peru" name="Peru" />
+          <label for="Peru">Peru</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Philippines" name="Philippines" />
+          <label for="Philippines">Philippines</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Poland" name="Poland" />
+          <label for="Poland">Poland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Qatar" name="Qatar" />
+          <label for="Qatar">Qatar</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Romania" name="Romania" />
+          <label for="Romania">Romania</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Russia" name="Russia" />
+          <label for="Russia">Russia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Rwanda" name="Rwanda" />
+          <label for="Rwanda">Rwanda</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Réunion" name="Réunion" />
+          <label for="Réunion">Réunion</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Saint-Martin" name="Saint-Martin" />
+          <label for="Saint-Martin">Saint-Martin</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SanMarino" name="SanMarino" />
+          <label for="SanMarino">San Marino</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SaoTomeandPrincipe" name="SaoTomeandPrincipe" />
+          <label for="SaoTomeandPrincipe">Sao Tome and Principe</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SaudiArabia" name="SaudiArabia" />
+          <label for="SaudiArabia">Saudi Arabia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Scotland" name="Scotland" />
+          <label for="Scotland">Scotland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Senegal" name="Senegal" />
+          <label for="Senegal">Senegal</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Serbia" name="Serbia" />
+          <label for="Serbia">Serbia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Seychelles" name="Seychelles" />
+          <label for="Seychelles">Seychelles</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SierraLeone" name="SierraLeone" />
+          <label for="SierraLeone">Sierra Leone</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SintMaarten" name="SintMaarten" />
+          <label for="SintMaarten">Sint Maarten</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Slovakia" name="Slovakia" />
+          <label for="Slovakia">Slovakia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Slovenia" name="Slovenia" />
+          <label for="Slovenia">Slovenia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SouthAfrica" name="SouthAfrica" />
+          <label for="SouthAfrica">South Africa</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="SouthernSudan" name="SouthernSudan" />
+          <label for="SouthernSudan">Southern Sudan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="St.KittsAndNevis" name="St.KittsAndNevis" />
+          <label for="St.KittsAndNevis">St. Kitts &amp; Nevis</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="St.Lucia" name="St.Lucia" />
+          <label for="St.Lucia">St. Lucia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Suriname" name="Suriname" />
+          <label for="Suriname">Suriname</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Sweden" name="Sweden" />
+          <label for="Sweden">Sweden</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Switzerland" name="Switzerland" />
+          <label for="Switzerland">Switzerland</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Syria" name="Syria" />
+          <label for="Syria">Syria</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Tahiti" name="Tahiti" />
+          <label for="Tahiti">Tahiti</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Tajikistan" name="Tajikistan" />
+          <label for="Tajikistan">Tajikistan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Tanzania" name="Tanzania" />
+          <label for="Tanzania">Tanzania</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Thailand" name="Thailand" />
+          <label for="Thailand">Thailand</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="TheGambia" name="TheGambia" />
+          <label for="TheGambia">The Gambia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Togo" name="Togo" />
+          <label for="Togo">Togo</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="TrinidadandTobago" name="TrinidadandTobago" />
+          <label for="TrinidadandTobago">Trinidad and Tobago</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Tunisia" name="Tunisia" />
+          <label for="Tunisia">Tunisia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Turkey" name="Turkey" />
+          <label for="Turkey">Turkey</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Türkiye" name="Türkiye" />
+          <label for="Türkiye">Türkiye</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Uganda" name="Uganda" />
+          <label for="Uganda">Uganda</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Ukraine" name="Ukraine" />
+          <label for="Ukraine">Ukraine</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="UnitedStates" name="UnitedStates" />
+          <label for="UnitedStates">United States</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Uruguay" name="Uruguay" />
+          <label for="Uruguay">Uruguay</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Uzbekistan" name="Uzbekistan" />
+          <label for="Uzbekistan">Uzbekistan</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Venezuela" name="Venezuela" />
+          <label for="Venezuela">Venezuela</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Vietnam" name="Vietnam" />
+          <label for="Vietnam">Vietnam</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Wales" name="Wales" />
+          <label for="Wales">Wales</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Zambia" name="Zambia" />
+          <label for="Zambia">Zambia</label>
+        </div>
+        <div class="checkboxelement">
+          <input type="checkbox" id="Zimbabwe" name="Zimbabwe" />
+          <label for="Zimbabwe">Zimbabwe</label>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
